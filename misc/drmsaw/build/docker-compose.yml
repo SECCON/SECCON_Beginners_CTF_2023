@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    links:
+      - express
+    depends_on:
+      - express
+    volumes:
+      - /etc/seccon/_.beginners.seccon.games.crt:/etc/nginx/certs/server.crt:ro
+      - /etc/seccon/_.beginners.seccon.games.key:/etc/nginx/certs/server.key:ro
+  
+  express:
+    build: .
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - FLAG=ctf4b{d1ff1cul7_70_3n5ur3_53cur17y_1n_cl13n7-51d3-4pp5}

@@ -1,0 +1,64 @@
+version: "3.8"
+
+services:
+  client:
+    build: ./client
+    restart: always
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3000
+      - CLIENT_URL=https://oooauth.beginners.seccon.games:3000
+      - SERVER_URL=https://oooauth.beginners.seccon.games:3001
+      - CLIENT_ID=oauth-client
+      - CLIENT_SECRET=057307322c9e3b1db7d3aa976b8af405
+  server:
+    build: ./server
+    restart: always
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3001
+      - ADMIN_PASSWORD=fbdd04438d340cc060a4f710536f4654
+      - CLIENT_SECRET=057307322c9e3b1db7d3aa976b8af405
+      - CLIENT_URL=https://oooauth.beginners.seccon.games:3000
+      - FLAG=ctf4b{J00_4re_7HE_vUlN_cH41n_m457eR_0F_04U7H}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+  redis:
+    image: redis:7-alpine
+    volumes:
+      - redis:/data
+    ports:
+      - 16379:6379
+    restart: always
+  nginx-client:
+    build: ./nginx-client
+    ports:
+      - 3000:443
+    depends_on:
+      - client
+    restart: always
+    volumes:
+      - /etc/seccon/_.beginners.seccon.games.crt:/etc/nginx/certs/server.crt:ro
+      - /etc/seccon/_.beginners.seccon.games.key:/etc/nginx/certs/server.key:ro
+  nginx-server:
+    build: ./nginx-server
+    ports:
+      - 3001:443
+    depends_on:
+      - server
+    restart: always
+    volumes:
+      - /etc/seccon/_.beginners.seccon.games.crt:/etc/nginx/certs/server.crt:ro
+      - /etc/seccon/_.beginners.seccon.games.key:/etc/nginx/certs/server.key:ro
+  crawler:
+    build: ./crawler
+    restart: always
+    environment:
+      - SERVER_URL=https://oooauth.beginners.seccon.games:3001
+      - USERNAME=admin
+      - PASSWORD=fbdd04438d340cc060a4f710536f4654
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+volumes:
+  redis:

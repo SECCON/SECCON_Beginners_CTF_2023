@@ -1,0 +1,10 @@
+version: '3'
+services:
+  treasure:
+    build:
+      context: .
+    working_dir: /home/ctf
+    container_name: treasure
+    restart: always
+    ports:
+      - "13778:13778"

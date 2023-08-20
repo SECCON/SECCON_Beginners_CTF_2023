@@ -1,0 +1,15 @@
+{
+    "name": "double-check",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "express-session": "^1.17.3",
+        "jsonwebtoken": "^8.5.1",
+        "lodash": "^4.17.21"
+    }
+}

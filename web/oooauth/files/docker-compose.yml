@@ -1,0 +1,49 @@
+version: "3.8"
+
+services:
+  client:
+    build: ./client
+    restart: always
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3000
+      - CLIENT_URL=http://localhost:3000
+      - SERVER_URL=http://localhost:3001
+      - CLIENT_ID=oauth-client
+      - CLIENT_SECRET=dummy_secret
+  server:
+    build: ./server
+    restart: always
+    environment:
+      - HOST=0.0.0.0
+      - PORT=3001
+      - ADMIN_PASSWORD=dummy_password
+      - CLIENT_SECRET=dummy_secret
+      - CLIENT_URL=http://localhost:3000
+      - FLAG=ctf4b{dummy-flag}
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+  redis:
+    image: redis:7-alpine
+    restart: always
+    volumes:
+      - redis:/data
+    ports:
+      - 16379:6379
+  nginx-client:
+    build: ./nginx-client
+    ports:
+      - 3000:80
+    depends_on:
+      - client
+    restart: always
+  nginx-server:
+    build: ./nginx-server
+    ports:
+      - 3001:80
+    depends_on:
+      - server
+    restart: always
+
+volumes:
+  redis:

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Phisher2</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body class="bg-gray-100">
+    <div class="container mx-auto px-4 py-8 max-w-xl text-center">
+      <h1 class="text-2xl font-bold mb-4">Phisher2</h1>
+      <p class="text-lg mb-8">
+        あなたの作成したHTMLファイルでAdminを騙してみましょう！AdminはHTMLに含まれるURLのドメインを見て、安全なドメインならアクセスします。
+      </p>
+      <p class="text-lg mb-8">
+        Let's Phish Admin with the HTML file that you created! Admin will access
+        the URL in the HTML only if it contains a safe domain.
+      </p>
+
+      <pre
+        class="bg-gray-800 text-white rounded-md p-4 mb-8 overflow-x-auto"
+      ><code class="language-sh">curl -X POST -H "Content-Type: application/json" -d '{"text":"https://phisher2.beginners.seccon.games/foobar"}' https://phisher2.beginners.seccon.games</code></pre>
+    </div>
+  </body>
+</html>

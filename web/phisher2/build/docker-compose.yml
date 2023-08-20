@@ -1,0 +1,22 @@
+# macos m1 is not supported
+version: "3.8"
+
+services:
+  uwsgi:
+    build: ./phisher2
+    environment:
+      TZ: "Asia/Tokyo"
+      APP_URL: https://phisher2.beginners.seccon.games/
+      FLAG: ctf4b{w451t4c4t154w?}
+  nginx:
+    build: ./nginx
+    links:
+      - uwsgi
+    ports:
+       - "80:80"
+       - "443:443"
+    environment:
+      TZ: "Asia/Tokyo"
+    volumes:
+      - /etc/seccon/_.beginners.seccon.games.crt:/etc/nginx/certs/server.crt:ro
+      - /etc/seccon/_.beginners.seccon.games.key:/etc/nginx/certs/server.key:ro

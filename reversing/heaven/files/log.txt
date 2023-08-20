@@ -1,0 +1,8 @@
+$ ./heaven
+------ menu ------
+0: encrypt message
+1: decrypt message
+2: exit
+> 0
+message: ctf4b{---CENSORED---}
+encrypted message: ca6ae6e83d63c90bed34a8be8a0bfd3ded34f25034ec508ae8ec0b7f

@@ -1,0 +1,15 @@
+version: '3.9'
+
+services:
+  app:
+    build: ./app
+    restart: always
+    env_file: ./app/.env
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    depends_on:
+      - app
+    restart: always

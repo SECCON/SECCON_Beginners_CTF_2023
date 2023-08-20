@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  polyglot4b:
+    build:
+      context: .
+    working_dir: /home/ctf/polyglot4b
+    restart: always
+    ports:
+      - "31416:31416"

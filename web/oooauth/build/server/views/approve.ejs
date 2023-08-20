@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>OAuth Authorization Server</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1><a href="/">OAuth Authorization Server</a></h1>
+    </div>
+    <div class="container">
+        <div class="jumbotron">
+            <h2>Client</h2>
+            <p><%= client_id %></p>
+
+            <h2>Requested Permissions</h2>
+            <% if(scopes) { %>
+            <ul>
+                <% scopes.forEach(function(scope) { %>
+                    <li><%= scope %></li>
+                <% }); %>
+            </ul>
+            <% }; %>
+
+            <h2>Approve this client?</h2>
+            <form class="form" action="/approve" method="POST">
+                <div class="form-group">
+                    <label for="username">username:</label>
+                    <input type="text" id="username" name="username" class="form-control" value="">
+                </div>
+                <div class="form-group">
+                    <label for="password">password:</label>
+                    <input type="password" id="password" name="password" class="form-control" value="">
+                </div>
+                <input type="submit" class="btn btn-success" name="approved" value="Approve" />
+                <input type="submit" class="btn btn-danger" name="denied" value="Deny" />
+            </form>
+        </div>
+    </div>
+</body>
+</html>

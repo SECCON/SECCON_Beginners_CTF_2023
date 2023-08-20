@@ -1,0 +1,23 @@
+version: "3.3"
+
+services:
+  uwsgi:
+    build: ./app
+    environment:
+      TZ: "Asia/Tokyo"
+    expose:
+      - "7777"
+    restart: always
+  nginx:
+    build: ./nginx
+    volumes:
+      - /etc/seccon/_.beginners.seccon.games.crt:/etc/nginx/certs/server.crt:ro
+      - /etc/seccon/_.beginners.seccon.games.key:/etc/nginx/certs/server.key:ro
+    links:
+      - uwsgi
+    ports:
+      - "80:80"
+      - "443:443"
+    environment:
+      TZ: "Asia/Tokyo"
+    restart: always

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <title>OAuth Client</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js" nonce="<%= nonce %>"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" nonce="<%= nonce %>"></script>
+  </head>
+  <body>
+    <div>
+      <div class="container">
+        <h1><a href="/">OAuth Client</a></h1>
+      </div>
+      <div class="container">
+        <div class="jumbotron">
+          <% if(username) { %>
+            <p>Logged in as: <%= username %></p>
+          <% } else { %>
+            <p>You are not logged in</p>
+          <% }; %>
+          
+          <% if(scopes) { %>
+            <p>Your Permissions:</p>
+            <ul>
+                <% scopes.forEach(function(scope) { %>
+                    <li><%- scope %></li>
+                <% }); %>
+            </ul>
+          <% }; %>
+          
+          <a type="button" class="btn btn-primary" href="/auth">Login</a>
+          
+          <div style="display:inline-flex">
+            <form class="form" action="/logout" method="POST">
+              <input type="submit" class="btn btn-primary" value="Logout" />
+            </form>
+          </div>
+
+          <a type="button" class="btn btn-primary" href="/flag">Get flag!!</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+# macos m1 is not supported
+version: "3.8"
+
+services:
+  uwsgi:
+    build: ./phisher2
+    environment:
+      TZ: "Asia/Tokyo"
+      APP_URL: https://phisher2.beginners.seccon.games/
+      FLAG: ctf4b{dummy_flag}
+  nginx:
+    build: ./nginx
+    links:
+      - uwsgi
+    ports:
+       - "80:80"
+    environment:
+      TZ: "Asia/Tokyo"

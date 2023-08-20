@@ -1,0 +1,2 @@
+seed = 219857298424504813337494024829602082766
+flag = b"ctf4b{DidTheCatWantToCatDevRandom???}"

@@ -1,0 +1,13 @@
+version: "3"
+
+services:
+  cooking:
+    build:
+      context: .
+    restart: always
+    working_dir: /usr/src/app
+    ulimits:
+      nproc: 4096
+    ports:
+      - "1337:1337"
+

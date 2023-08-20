@@ -1,0 +1,12 @@
+version: "3"
+
+services:
+  shaxxx:
+    build:
+      context: .
+    working_dir: /home/ctf/shaXXX
+    restart: always
+    ports:
+      - 25612:44322
+    environment:
+      TZ: Asia/Tokyo
